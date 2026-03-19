@@ -1,2 +1,3 @@
-# React + TypeScript + Vite
+# Heroes APP
+## React + TypeScript + Vite
 
