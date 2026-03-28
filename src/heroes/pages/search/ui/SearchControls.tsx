@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useRef } from "react"
 import { useSearchParams } from "react-router"
 
 import { Button } from "@/components/ui/button"
@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/accordion"
 
 const SearchControls = () => {
-    
 
     const [searchParams, setSearchParams] = useSearchParams()
     const inputRef = useRef<HTMLInputElement>(null)
@@ -42,7 +41,7 @@ const SearchControls = () => {
     const activeAccordion = searchParams.get('active-accordion') ?? ''
     const selectStrength = Number(searchParams.get('strength') ?? 0)
 
-    const [tempStrength, setTempStrength] = useState(selectStrength)
+
 
     return (
         <>
@@ -139,14 +138,13 @@ const SearchControls = () => {
                                 </div>
                             </div>
                             <div className="mt-4">
-                                <label className="text-sm font-medium">Minimum Strength: {tempStrength}/10</label>
+                                <label className="text-sm font-medium">Minimum Strength: {selectStrength}/10</label>
 
                                 <Slider
-                                    value={[tempStrength]}
+                                    value={[selectStrength]}
                                     max={10}
                                     step={1}
-                                    onValueChange={(value) => setTempStrength(value[0])}
-                                    onValueCommit={(value) => setQueryParams('strength', value[0].toString())}
+                                    onValueChange={(value) => setQueryParams('strength', value[0].toString())}
                                 />
                             </div>
                         </div>
