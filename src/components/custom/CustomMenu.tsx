@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router"
-import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "../components/ui/navigation-menu"
 import { cn } from "@/lib/utils"
+import { NavigationMenuList, NavigationMenuItem, NavigationMenuLink, NavigationMenu} from "../ui/navigation-menu"
 
 
 const CustomMenu = () => {
@@ -10,20 +10,20 @@ const CustomMenu = () => {
     const isActive = (path:string) => pathname === path
 
     return (
-        <NavigationMenu>
+        <NavigationMenu className="py-4">
             <NavigationMenuList>
 
                 {/*Inicio*/}
                 <NavigationMenuItem>
-                    <NavigationMenuLink className={cn(isActive('/') && 'bg-slate-200', 'rounded-md p-2')}>
+                    <NavigationMenuLink asChild className={cn(isActive('/') && 'bg-slate-200', 'rounded-md p-2')}>
                         <Link to="/">Inicio</Link>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 {/*Buscar*/}
                 <NavigationMenuItem>
-                    <NavigationMenuLink className={cn(isActive('/search') && 'bg-slate-200', 'rounded-md p-2')}>
-                        <Link to="/search">Buscar</Link>
+                    <NavigationMenuLink asChild className={cn(isActive('/search') && 'bg-slate-200', 'rounded-md p-2')}>
+                        <Link to="/search">Buscar superhéroes</Link>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
             </NavigationMenuList>

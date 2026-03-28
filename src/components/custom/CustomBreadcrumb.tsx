@@ -23,7 +23,7 @@ const CustomBreadcrumb = ({ currentPage, breadcrumbs }: Props) => {
         <Breadcrumb className="my-5">
             <BreadcrumbList>
                 <BreadcrumbItem>
-                    <BreadcrumbLink>
+                    <BreadcrumbLink asChild>
                         <Link to={'/'}>Inicio</Link>
                     </BreadcrumbLink>
                 </BreadcrumbItem>
