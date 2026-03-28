@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useSearchParams } from "react-router"
 
 import { Button } from "@/components/ui/button"
@@ -13,12 +13,10 @@ import {
 } from "@/components/ui/accordion"
 
 const SearchControls = () => {
+    
 
     const [searchParams, setSearchParams] = useSearchParams()
     const inputRef = useRef<HTMLInputElement>(null)
-
-    const activeAccordion = searchParams.get('active-accordion') ?? ''
-    const selectStrength = Number(searchParams.get('strength') ?? 0)
 
     const setQueryParams = (name: string, value: string) => {
         setSearchParams((prev: URLSearchParams) => {
@@ -34,10 +32,17 @@ const SearchControls = () => {
         }
     }
 
+    const handleClickClear = () => {
+        setSearchParams((prev) => {
+            prev.delete('strength')
+            return prev
+        })
+    }
 
+    const activeAccordion = searchParams.get('active-accordion') ?? ''
+    const selectStrength = Number(searchParams.get('strength') ?? 0)
 
-
-
+    const [tempStrength, setTempStrength] = useState(selectStrength)
 
     return (
         <>
@@ -100,7 +105,12 @@ const SearchControls = () => {
                         <div className="bg-white rounded-lg p-6 mb-8 shadow-sm border">
                             <div className="flex justify-between items-center mb-4">
                                 <h3 className="text-lg font-semibold">Advanced Filters</h3>
-                                <Button variant="ghost">Clear All</Button>
+                                <Button
+                                    variant="ghost"
+                                    onClick={handleClickClear}
+                                >
+                                    Clear All
+                                </Button>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                 <div className="space-y-2">
@@ -129,13 +139,14 @@ const SearchControls = () => {
                                 </div>
                             </div>
                             <div className="mt-4">
-                                <label className="text-sm font-medium">Minimum Strength: {selectStrength}/10</label>
+                                <label className="text-sm font-medium">Minimum Strength: {tempStrength}/10</label>
 
                                 <Slider
-                                    defaultValue={[selectStrength]}
+                                    value={[tempStrength]}
                                     max={10}
                                     step={1}
-                                    onValueChange={(value) => setQueryParams('strength', value[0].toString())}
+                                    onValueChange={(value) => setTempStrength(value[0])}
+                                    onValueCommit={(value) => setQueryParams('strength', value[0].toString())}
                                 />
                             </div>
                         </div>
