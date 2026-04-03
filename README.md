@@ -1,3 +1,5 @@
 # Heroes APP
-## React + TypeScript + Vite
+React + TypeScript + Vite
 
+## URL
+https://heroesapp-jet.netlify.app/
